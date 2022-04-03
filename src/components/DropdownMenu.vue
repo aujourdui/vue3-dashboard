@@ -16,24 +16,31 @@ const toggle = () => {
       class="rounded-full w-10 h-10 cursor-pointer"
       @click="toggle"
     />
-    <div
-      class="absolute top-16 right-0 z-10 w-40 py-2 bg-white rounded-sm shadow"
-      v-show="show"
+    <Transition
+      enter-active-class="transition-opacity duration-300"
+      enter-from-class="opacity-0"
+      leave-active-class="transition-opacity duration-300"
+      leave-to-class="opacity-0"
     >
-      <ul>
-        <li class="text-gray-700 hover:bg-blue-100 hover:text-blue-600 p-2">
-          <a href="/#" class="flex items-center space-x-2">
-            <UserIcon class="w-5 h-5" />
-            <span class="text-sm font-bold">Profile</span>
-          </a>
-        </li>
-        <li class="text-gray-700 hover:bg-blue-100 hover:text-blue-600 p-2">
-          <a href="/#" class="flex items-center space-x-2">
-            <LogoutIcon class="w-5 h-5" />
-            <span class="text-sm font-bold">Logout</span>
-          </a>
-        </li>
-      </ul>
-    </div>
+      <div
+        class="absolute top-16 right-0 z-10 w-40 py-2 bg-white rounded-sm shadow"
+        v-show="show"
+      >
+        <ul>
+          <li class="text-gray-700 hover:bg-blue-100 hover:text-blue-600 p-2">
+            <a href="/#" class="flex items-center space-x-2">
+              <UserIcon class="w-5 h-5" />
+              <span class="text-sm font-bold">Profile</span>
+            </a>
+          </li>
+          <li class="text-gray-700 hover:bg-blue-100 hover:text-blue-600 p-2">
+            <a href="/#" class="flex items-center space-x-2">
+              <LogoutIcon class="w-5 h-5" />
+              <span class="text-sm font-bold">Logout</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </Transition>
   </div>
 </template>
