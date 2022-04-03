@@ -23,17 +23,21 @@ const toggle = () => {
       leave-to-class="opacity-0"
     >
       <div
-        class="absolute top-16 right-0 z-10 w-40 py-2 bg-white rounded-sm shadow"
+        class="absolute top-16 right-0 z-10 w-40 py-2 bg-white rounded-sm shadow dark:bg-gray-800"
         v-show="show"
       >
         <ul>
-          <li class="text-gray-700 hover:bg-blue-100 hover:text-blue-600 p-2">
+          <li
+            class="text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-600 p-2"
+          >
             <a href="/#" class="flex items-center space-x-2">
               <UserIcon class="w-5 h-5" />
               <span class="text-sm font-bold">Profile</span>
             </a>
           </li>
-          <li class="text-gray-700 hover:bg-blue-100 hover:text-blue-600 p-2">
+          <li
+            class="text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-600 p-2"
+          >
             <a href="/#" class="flex items-center space-x-2">
               <LogoutIcon class="w-5 h-5" />
               <span class="text-sm font-bold">Logout</span>
