@@ -3,6 +3,8 @@ import { ref, onMounted, onUnmounted } from "vue";
 import { MenuIcon, MoonIcon, SunIcon } from "@heroicons/vue/outline";
 import { debounce } from "lodash";
 
+import DropdownMenu from "../components/DropdownMenu.vue";
+
 const innerWidth = ref(window.innerWidth);
 const show = ref(innerWidth.value >= 1280 ? true : false);
 
@@ -68,7 +70,7 @@ onUnmounted(() => {
           class="h-6 w-6 text-gray-600 dark:text-gray-300 cursor-pointer"
           @click="show = !show"
         />
-        <div>
+        <div class="flex item-center space-x-4">
           <MoonIcon
             class="w-7 h-7 text-gray-600 cursor-pointer"
             @click="changeMode('dark')"
@@ -79,6 +81,7 @@ onUnmounted(() => {
             @click="changeMode('light')"
             v-else
           />
+          <DropdownMenu />
         </div>
       </div>
       <div class="dark:text-gray-300">
