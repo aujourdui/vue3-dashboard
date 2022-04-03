@@ -1,5 +1,9 @@
-<script setup></script>
+<script setup>
+import Default from "./layouts/Default.vue";
+</script>
 
 <template>
-  <div class="font-semibold">Dashboard</div>
+  <Default>Dashboard</Default>
 </template>
+
+<style></style>
