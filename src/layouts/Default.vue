@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
-import { MenuIcon } from "@heroicons/vue/outline";
+import { MenuIcon, MoonIcon, SunIcon } from "@heroicons/vue/outline";
 import { debounce } from "lodash";
 
 const innerWidth = ref(window.innerWidth);
@@ -15,6 +15,15 @@ const checkWindowSize = () => {
     }
     innerWidth.value = window.innerWidth;
   }
+};
+
+const theme = ref("light");
+
+const changeMode = (mode) => {
+  theme.value = mode;
+  theme.value === "light"
+    ? document.documentElement.classList.remove("dark")
+    : document.documentElement.classList.add("dark");
 };
 
 onMounted(() => {
@@ -43,11 +52,25 @@ onUnmounted(() => {
       class="bg-gray-100 dark:bg-gray-900 h-screen overflow-hidden duration-300"
       :class="{ 'xl:pl-64': show }"
     >
-      <div class="bg-white dark:bg-gray-800 rounded shadow m-4 p-4">
+      <div
+        class="flex items-center justify-between bg-white dark:bg-gray-800 rounded shadow m-4 p-4"
+      >
         <MenuIcon
           class="h-6 w-6 text-gray-600 dark:text-gray-300 cursor-pointer"
           @click="show = !show"
         />
+        <div>
+          <MoonIcon
+            class="w-7 h-7 text-gray-600 cursor-pointer"
+            @click="changeMode('dark')"
+            v-if="theme === 'light'"
+          />
+          <SunIcon
+            class="w-7 h-7 text-gray-300 cursor-pointer"
+            @click="changeMode('light')"
+            v-else
+          />
+        </div>
       </div>
       <div class="dark:text-gray-300">
         <slot />
