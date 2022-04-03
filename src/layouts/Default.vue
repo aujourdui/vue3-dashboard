@@ -19,11 +19,20 @@ const checkWindowSize = () => {
 
 const theme = ref("light");
 
+if (localStorage.theme === "dark") {
+  document.documentElement.classList.add("dark");
+  theme.value = "dark";
+} else {
+  document.documentElement.classList.remove("dark");
+  theme.value = "light";
+}
+
 const changeMode = (mode) => {
   theme.value = mode;
   theme.value === "light"
     ? document.documentElement.classList.remove("dark")
     : document.documentElement.classList.add("dark");
+  localStorage.theme = mode;
 };
 
 onMounted(() => {
