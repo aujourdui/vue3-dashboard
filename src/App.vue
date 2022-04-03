@@ -5,3 +5,5 @@ import Default from "./layouts/Default.vue";
 <template>
   <Default>Dashboard</Default>
 </template>
+
+<style></style>

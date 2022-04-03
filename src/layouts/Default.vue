@@ -15,7 +15,7 @@ const show = ref(true);
     </div>
     <div
       class="bg-gray-100 h-screen overflow-hidden"
-      :class="{ 'pl-64': show }"
+      :class="{ 'xl:pl-64': show }"
     >
       <div class="bg-white rounded shadow m-4 p-4">
         <MenuIcon
@@ -30,3 +30,5 @@ const show = ref(true);
     >
   </div>
 </template>
+
+<style></style>
