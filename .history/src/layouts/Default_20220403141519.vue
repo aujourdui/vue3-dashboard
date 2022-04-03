@@ -8,7 +8,7 @@ const show = ref(true);
 <template>
   <div class="relative">
     <div
-      class="fixed top-0 w-64 h-screen bg-white z-20 transform duration-300"
+      class="fixed top-0 w-64 h-screen bg-white z-20 transform"
       :class="{ '-translate-x-full': !show }"
     >
       Side bar
@@ -19,7 +19,7 @@ const show = ref(true);
       v-show="show"
     ></div>
     <div
-      class="bg-gray-100 h-screen overflow-hidden duration-300"
+      class="bg-gray-100 h-screen overflow-hidden"
       :class="{ 'xl:pl-64': show }"
     >
       <div class="bg-white rounded shadow m-4 p-4">
