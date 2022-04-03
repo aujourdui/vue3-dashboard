@@ -1,5 +1,12 @@
 <script setup>
+import { ref } from "vue";
 import { UserIcon, LogoutIcon } from "@heroicons/vue/outline";
+
+const show = ref(false);
+
+const toggle = () => {
+  show.value = !show.value;
+};
 </script>
 
 <template>
@@ -7,9 +14,11 @@ import { UserIcon, LogoutIcon } from "@heroicons/vue/outline";
     <img
       src="../assets/avatar.jpeg"
       class="rounded-full w-10 h-10 cursor-pointer"
+      @click="toggle"
     />
     <div
       class="absolute top-16 right-0 z-10 w-40 py-2 bg-white rounded-sm shadow"
+      v-show="show"
     >
       <ul>
         <li class="text-gray-700 hover:bg-blue-100 hover:text-blue-600 p-2">
