@@ -1,8 +1,29 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { MenuIcon } from "@heroicons/vue/outline";
+import { debounce } from "lodash";
 
-const show = ref(true);
+const innerWidth = ref(window.innerWidth);
+const show = ref(innerWidth.value >= 1280 ? true : false);
+
+const checkWindowSize = () => {
+  if (window.innerWidth >= 1280) {
+    if (show.value === false && innerWidth.value < 1280) {
+      show.value = true;
+    } else {
+      if (show.value === true) show.value = false;
+    }
+    innerWidth.value = window.innerWidth;
+  }
+};
+
+onMounted(() => {
+  window.addEventListener("resize", debounce(checkWindowSize, 100));
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", checkWindowSize);
+});
 </script>
 
 <template>
