@@ -7,7 +7,12 @@ const show = ref(true);
 
 <template>
   <div class="relative">
-    <div class="fixed top-0 w-64 h-screen bg-white z-20">Side bar</div>
+    <div
+      class="fixed top-0 w-64 h-screen bg-white z-20 transform"
+      :class="{ '-translate-x-full': !show }"
+    >
+      Side bar
+    </div>
     <div
       class="bg-gray-100 h-screen overflow-hidden"
       :class="{ 'pl-64': show }"
