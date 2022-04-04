@@ -37,8 +37,13 @@ const lists = reactive([
         name: "Order list",
         link: "/#",
       },
+      {
+        name: "Category list",
+        link: "/#",
+      },
     ],
   },
+  { name: "Dashboard", icon: "TemplateIcon", link: "/" },
 ]);
 </script>
 
@@ -64,18 +69,38 @@ const lists = reactive([
             {{ list.name }}
           </span>
         </div>
-        <ChevronDownIcon class="w-4 h-4" />
+        <ChevronDownIcon
+          class="w-4 h-4 transform duration-300"
+          :class="!list.show ? '-rotate-90' : 'rotate-0'"
+        />
       </div>
-      <ul class="mt-1" v-show="list.show">
-        <li class="mb-1" v-for="list in list.sublists" :key="list.name">
-          <a
-            :href="list.link"
-            class="block p-2 rounded-sm hover:bg-blue-400 hover:text-white"
-          >
-            <span class="pl-8">{{ list.name }}</span>
-          </a>
-        </li>
-      </ul>
+      <Transition>
+        <ul class="mt-1 overflow-hidden" v-show="list.show">
+          <li class="mb-1" v-for="list in list.sublists" :key="list.name">
+            <a
+              :href="list.link"
+              class="block p-2 rounded-sm hover:bg-blue-400 hover:text-white"
+            >
+              <span class="pl-8">{{ list.name }}</span>
+            </a>
+          </li>
+        </ul>
+      </Transition>
     </li>
   </ul>
 </template>
+
+<style scoped>
+.v-enter-from,
+.v-enter-to {
+  height: 0;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: height 0.3s;
+}
+.v-enter-to,
+.v-leave-from {
+  height: 100px;
+}
+</style>
