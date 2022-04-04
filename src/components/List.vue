@@ -1,11 +1,20 @@
 <script setup>
 import { reactive } from "vue";
 
-import { TemplateIcon, ShoppingCartIcon } from "@heroicons/vue/outline";
+import {
+  TemplateIcon,
+  ShoppingCartIcon,
+  ChevronDownIcon,
+} from "@heroicons/vue/outline";
 
 const icons = {
   TemplateIcon: TemplateIcon,
   ShoppingCartIcon: ShoppingCartIcon,
+};
+
+const toggle = (name) => {
+  const list = lists.find((list) => list.name === name);
+  list.show = !list.show;
 };
 
 const lists = reactive([
@@ -18,6 +27,7 @@ const lists = reactive([
     name: "EC",
     icon: "ShoppingCartIcon",
     link: "/#",
+    show: false,
     sublists: [
       {
         name: "Product list",
@@ -45,14 +55,18 @@ const lists = reactive([
       </a>
       <div
         v-else
-        class="flex items-center p-2 cursor-pointer rounded-sm hover:bg-blue-400 hover:text-white"
+        class="flex items-center justify-between p-2 cursor-pointer rounded-sm hover:bg-blue-400 hover:text-white"
+        @click="toggle(list.name)"
       >
-        <component :is="icons[list.icon]" class="w-6 h-6 mr-2"></component>
-        <span>
-          {{ list.name }}
-        </span>
+        <div class="flex items-center">
+          <component :is="icons[list.icon]" class="w-6 h-6 mr-2"></component>
+          <span>
+            {{ list.name }}
+          </span>
+        </div>
+        <ChevronDownIcon class="w-4 h-4" />
       </div>
-      <ul class="mt-1">
+      <ul class="mt-1" v-show="list.show">
         <li class="mb-1" v-for="list in list.sublists" :key="list.name">
           <a
             :href="list.link"
