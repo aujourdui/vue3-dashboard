@@ -66,7 +66,7 @@ const lists = reactive([
 </script>
 
 <template>
-  <ul class="text-gray-700">
+  <ul class="text-gray-700 dark:text-gray-300">
     <li class="mb-1" v-for="list in lists" :key="list.name">
       <a
         v-if="!list.sublists"
