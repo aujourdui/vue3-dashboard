@@ -17,6 +17,24 @@ const toggle = (name) => {
   list.show = !list.show;
 };
 
+const enter = (element) => {
+  element.style.height = "auto";
+  const height = getComputedStyle(element).height;
+  element.style.height = 0;
+  getComputedStyle(element);
+  setTimeout(() => {
+    element.style.height = height;
+  });
+};
+
+const leave = (element) => {
+  element.style.height = getComputedStyle(element).height;
+  getComputedStyle(element);
+  setTimeout(() => {
+    element.style.height = 0;
+  });
+};
+
 const lists = reactive([
   {
     name: "Dashboard",
@@ -74,7 +92,7 @@ const lists = reactive([
           :class="!list.show ? '-rotate-90' : 'rotate-0'"
         />
       </div>
-      <Transition>
+      <Transition @enter="enter" @leave="leave">
         <ul class="mt-1 overflow-hidden" v-show="list.show">
           <li class="mb-1" v-for="list in list.sublists" :key="list.name">
             <a
@@ -91,16 +109,8 @@ const lists = reactive([
 </template>
 
 <style scoped>
-.v-enter-from,
-.v-enter-to {
-  height: 0;
-}
 .v-enter-active,
 .v-leave-active {
   transition: height 0.3s;
-}
-.v-enter-to,
-.v-leave-from {
-  height: 100px;
 }
 </style>
