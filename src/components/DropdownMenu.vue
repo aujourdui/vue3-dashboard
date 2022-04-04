@@ -1,16 +1,26 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { UserIcon, LogoutIcon } from "@heroicons/vue/outline";
 
 const show = ref(false);
+const root = ref(null);
 
 const toggle = () => {
   show.value = !show.value;
 };
+
+const clickOutSide = (e) => {
+  if (!root.value.contains(e.target) && show.value) {
+    show.value = false;
+  }
+};
+
+onMounted(() => document.addEventListener("click", clickOutSide));
+onUnmounted(() => document.removeEventListener("click", clickOutSide));
 </script>
 
 <template>
-  <div class="relative">
+  <div class="relative" ref="root">
     <img
       src="../assets/avatar.jpeg"
       class="rounded-full w-10 h-10 cursor-pointer"
