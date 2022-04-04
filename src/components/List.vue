@@ -17,6 +17,24 @@ const toggle = (name) => {
   list.show = !list.show;
 };
 
+const enter = (element) => {
+  element.style.height = "auto";
+  const height = getComputedStyle(element).height;
+  element.style.height = 0;
+  getComputedStyle(element);
+  setTimeout(() => {
+    element.style.height = height;
+  });
+};
+
+const leave = (element) => {
+  element.style.height = getComputedStyle(element).height;
+  getComputedStyle(element);
+  setTimeout(() => {
+    element.style.height = 0;
+  });
+};
+
 const lists = reactive([
   {
     name: "Dashboard",
@@ -37,8 +55,13 @@ const lists = reactive([
         name: "Order list",
         link: "/#",
       },
+      {
+        name: "Category list",
+        link: "/#",
+      },
     ],
   },
+  { name: "Dashboard", icon: "TemplateIcon", link: "/" },
 ]);
 </script>
 
@@ -64,18 +87,30 @@ const lists = reactive([
             {{ list.name }}
           </span>
         </div>
-        <ChevronDownIcon class="w-4 h-4" />
+        <ChevronDownIcon
+          class="w-4 h-4 transform duration-300"
+          :class="!list.show ? '-rotate-90' : 'rotate-0'"
+        />
       </div>
-      <ul class="mt-1" v-show="list.show">
-        <li class="mb-1" v-for="list in list.sublists" :key="list.name">
-          <a
-            :href="list.link"
-            class="block p-2 rounded-sm hover:bg-blue-400 hover:text-white"
-          >
-            <span class="pl-8">{{ list.name }}</span>
-          </a>
-        </li>
-      </ul>
+      <Transition @enter="enter" @leave="leave">
+        <ul class="mt-1 overflow-hidden" v-show="list.show">
+          <li class="mb-1" v-for="list in list.sublists" :key="list.name">
+            <a
+              :href="list.link"
+              class="block p-2 rounded-sm hover:bg-blue-400 hover:text-white"
+            >
+              <span class="pl-8">{{ list.name }}</span>
+            </a>
+          </li>
+        </ul>
+      </Transition>
     </li>
   </ul>
 </template>
+
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: height 0.3s;
+}
+</style>
