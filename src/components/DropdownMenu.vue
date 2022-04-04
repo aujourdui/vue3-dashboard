@@ -40,10 +40,10 @@ onUnmounted(() => document.removeEventListener("click", clickOutSide));
           <li
             class="text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-600 p-2"
           >
-            <a href="/#" class="flex items-center space-x-2">
+            <RouterLink to="/profile" class="flex items-center space-x-2">
               <UserIcon class="w-5 h-5" />
               <span class="text-sm font-bold">Profile</span>
-            </a>
+            </RouterLink>
           </li>
           <li
             class="text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-600 p-2"
