@@ -1,11 +1,16 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
+import { useRoute } from "vue-router";
 
 import {
   TemplateIcon,
   ShoppingCartIcon,
   ChevronDownIcon,
 } from "@heroicons/vue/outline";
+
+const currentRoute = computed(() => {
+  return useRoute().fullPath;
+});
 
 const icons = {
   TemplateIcon: TemplateIcon,
@@ -49,33 +54,29 @@ const lists = reactive([
     sublists: [
       {
         name: "Product list",
-        link: "/#",
+        link: "/product",
       },
       {
         name: "Order list",
-        link: "/#",
-      },
-      {
-        name: "Category list",
-        link: "/#",
+        link: "/order",
       },
     ],
   },
-  { name: "Dashboard", icon: "TemplateIcon", link: "/" },
 ]);
 </script>
 
 <template>
-  <ul class="text-gray-700">
+  <ul class="text-gray-700 dark:text-gray-300">
     <li class="mb-1" v-for="list in lists" :key="list.name">
-      <a
+      <RouterLink
         v-if="!list.sublists"
-        :href="list.link"
+        :to="list.link"
         class="flex items-center block p-2 rounded-sm hover:text-white hover:bg-blue-400"
+        :class="{ 'bg-blue-600 text-white': currentRoute === list.link }"
       >
         <component :is="icons[list.icon]" class="w-6 h-6 mr-2"></component>
         <span>{{ list.name }}</span>
-      </a>
+      </RouterLink>
       <div
         v-else
         class="flex items-center justify-between p-2 cursor-pointer rounded-sm hover:bg-blue-400 hover:text-white"
@@ -95,12 +96,13 @@ const lists = reactive([
       <Transition @enter="enter" @leave="leave">
         <ul class="mt-1 overflow-hidden" v-show="list.show">
           <li class="mb-1" v-for="list in list.sublists" :key="list.name">
-            <a
-              :href="list.link"
+            <RouterLink
+              :to="list.link"
               class="block p-2 rounded-sm hover:bg-blue-400 hover:text-white"
+              :class="{ 'bg-blue-600 text-white': currentRoute === list.link }"
             >
               <span class="pl-8">{{ list.name }}</span>
-            </a>
+            </RouterLink>
           </li>
         </ul>
       </Transition>
