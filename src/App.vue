@@ -3,7 +3,7 @@ import Default from "./layouts/Default.vue";
 </script>
 
 <template>
-  <Default><router-view></router-view></Default>
+  <Default><RouterView></RouterView></Default>
 </template>
 
 <style></style>
