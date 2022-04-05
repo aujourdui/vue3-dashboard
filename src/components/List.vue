@@ -1,11 +1,16 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
+import { useRoute } from "vue-router";
 
 import {
   TemplateIcon,
   ShoppingCartIcon,
   ChevronDownIcon,
 } from "@heroicons/vue/outline";
+
+const currentRoute = computed(() => {
+  return useRoute().fullPath;
+});
 
 const icons = {
   TemplateIcon: TemplateIcon,
@@ -67,6 +72,7 @@ const lists = reactive([
         v-if="!list.sublists"
         :to="list.link"
         class="flex items-center block p-2 rounded-sm hover:text-white hover:bg-blue-400"
+        :class="{ 'bg-blue-600 text-white': currentRoute === list.link }"
       >
         <component :is="icons[list.icon]" class="w-6 h-6 mr-2"></component>
         <span>{{ list.name }}</span>
@@ -93,6 +99,7 @@ const lists = reactive([
             <RouterLink
               :to="list.link"
               class="block p-2 rounded-sm hover:bg-blue-400 hover:text-white"
+              :class="{ 'bg-blue-600 text-white': currentRoute === list.link }"
             >
               <span class="pl-8">{{ list.name }}</span>
             </RouterLink>
